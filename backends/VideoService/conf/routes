@@ -1,0 +1,6 @@
+# Routes
+# ~~~~
+
+GET        /players/:id/videos        controllers.VideoResource.searchByPlayerId(id: models.PlayerId)
+GET        /videos/top                controllers.VideoResource.topVideos()
+GET        /videos/:id/stream.mp4     controllers.VideoResource.videoStream(id: models.VideoId)

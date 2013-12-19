@@ -1,0 +1,6 @@
+# Routes
+# ~~~~
+
+GET        /players            controllers.PlayerResource.all
+GET        /players/:id        controllers.PlayerResource.player(id: models.PlayerId)
+GET        /players/:id/photo  controllers.PlayerResource.playerPhoto(id: models.PlayerId)

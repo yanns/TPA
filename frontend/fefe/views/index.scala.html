@@ -1,0 +1,39 @@
+@(videos: Seq[TopVideo])
+
+@main("Toys Basketball Association") {
+
+    <h1 class="center">Toy Basketball Association</h1>
+
+    <h1 class="tba-section-title mbl pbl">Top Videos of the week!</h1>
+    @for(video <- videos){
+    <div class="row">
+        <div class="col-md-4">
+            <div class="todo">
+                <div class="todo-search">
+                    @video.summary
+                </div>
+                <ul>
+                    @for(player <- video.players){
+                    <li class="todo-done">
+                        <div class="todo-icon fui-user"></div>
+                        <div class="todo-content">
+                            <h4 class="todo-name">
+                                <a href="@routes.Players.details(player.id)">@player.name</a>
+                            </h4>
+                            <a href="@routes.Players.details(player.id)">Player's info</a>
+                        </div>
+                    </li>
+                    }
+                </ul>
+            </div>
+        </div> <!-- /todo list -->
+
+        <div class="col-md-8 tba-video">
+            <video class="video-js" controls preload="auto" width="620" height="349" poster="assets/images/video/poster.jpg" data-setup="{}">
+                <source src="http://localhost:9002/videos/@video.id/stream.mp4" type="video/mp4">
+            </video>
+        </div> <!-- /video -->
+    </div>
+    }
+
+}

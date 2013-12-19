@@ -1,0 +1,26 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>@title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Loading Bootstrap -->
+        <link rel="stylesheet" href="@routes.Assets.at("bootstrap/css/bootstrap.css")">
+
+        <!-- Loading Flat UI -->
+        <link rel="stylesheet" href="@routes.Assets.at("css/flat-ui.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/tba.css")">
+
+        <link rel="shortcut icon" href="@routes.Assets.at("images/favicon.ico")">
+    </head>
+    <body>
+        <div class="container">
+            @content
+        </div>
+        <script src="@routes.Assets.at("js/video.js")"></script>
+    </body>
+</html>

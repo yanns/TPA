@@ -1,0 +1,31 @@
+@(player: Player)
+
+@main("Toys Basketball Association") {
+
+    <div class="row mbl pbl">
+        <h1 class="center">Toy Basketball Association</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="tba-section-title mbl btn btn-block btn-lg btn-info">@player.name</h1>
+            <h1 class="tba-section-title mbl btn btn-block btn-lg btn-inverse">@player.team</h1>
+            <div class="col-md-6">
+                <div class="tile">
+                    <div class="btn btn-primary btn-large btn-block">Height</div>
+                    <h3>@player.height</h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="tile">
+                    <div class="btn btn-primary btn-large btn-block">Weight</div>
+                    <h3>@player.weight</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img src="http://localhost:9001/players/@player.id/photo" alt="@player.name" class="img-rounded img-responsive player-photo">
+        </div>
+    </div>
+
+}
