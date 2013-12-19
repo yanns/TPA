@@ -9,7 +9,7 @@ trait Registry extends HttpClientComponent
   with VideoGatewayComponent
   with TopVideoServiceComponent
 
-abstract class RuntimeEnvironment extends Registry
+trait RuntimeEnvironment extends Registry
   with VideoGatewayComponentImpl
   with HttpClientComponentImpl
   with PlayerGatewayComponentImpl

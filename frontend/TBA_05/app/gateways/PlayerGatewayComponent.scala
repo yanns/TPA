@@ -45,3 +45,10 @@ trait PlayerGatewayComponent {
   }
 }
 
+trait PlayerGatewayComponentImpl extends PlayerGatewayComponent {
+
+  self: HttpClientComponent =>
+
+  override val playerGateway = new PlayerGateway
+}
+

@@ -42,3 +42,10 @@ trait VideoGatewayComponent {
 
   }
 }
+
+trait VideoGatewayComponentImpl extends VideoGatewayComponent {
+
+  self: HttpClientComponent =>
+
+  override val videoGateway = new VideoGateway
+}

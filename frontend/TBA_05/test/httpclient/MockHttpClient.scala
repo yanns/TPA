@@ -1,6 +1,5 @@
 package httpclient
 
-import httpclient.{MockWS, HttpClientComponent}
 import org.specs2.mock.Mockito
 
 trait MockHttpClient extends HttpClientComponent with Mockito {

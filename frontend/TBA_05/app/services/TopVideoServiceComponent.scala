@@ -46,3 +46,11 @@ trait TopVideoServiceComponent {
   }
 
 }
+
+trait TopVideoServiceComponentImpl extends TopVideoServiceComponent {
+
+  self: PlayerGatewayComponent with VideoGatewayComponent =>
+
+  override val topVideoService = new TopVideoService
+
+}
