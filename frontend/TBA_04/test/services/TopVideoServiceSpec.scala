@@ -1,6 +1,5 @@
 package services
 
-import httpclient.HttpClientComponentImpl
 import models.{Player, PlayerId, VideoId}
 import org.specs2.mock.Mockito
 import org.specs2.specification.Scope
@@ -11,7 +10,6 @@ class TopVideoServiceSpec extends PlaySpecification {
 
    class TopVideoScope extends TopVideoServiceComponent
        with TopVideoServiceComponentImpl
-       with HttpClientComponentImpl
        with Scope
        with Mockito {
 
@@ -31,6 +29,8 @@ class TopVideoServiceSpec extends PlaySpecification {
 
      override val videoGateway = mock[VideoGateway]
      override val playerGateway = mock[PlayerGateway]
+     // must be defined but is not used
+     override val httpClient = mock[HttpClient]
    }
 
    "the top videos" should {
