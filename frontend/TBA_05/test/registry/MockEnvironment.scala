@@ -3,7 +3,7 @@ package registry
 import components.Registry
 import org.specs2.mock.Mockito
 
-abstract class MockEnvironment extends Registry with Mockito {
+class MockEnvironment extends Registry with Mockito {
   override val httpClient = mock[HttpClient]
   override val playerGateway = mock[PlayerGateway]
   override val videoGateway = mock[VideoGateway]

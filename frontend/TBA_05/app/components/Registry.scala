@@ -9,7 +9,7 @@ trait Registry extends HttpClientComponent
   with VideoGatewayComponent
   with TopVideoServiceComponent
 
-abstract class RuntimeEnvironment extends Registry {
+class RuntimeEnvironment extends Registry {
   override val httpClient = new HttpClient
   override val playerGateway = new PlayerGateway
   override val videoGateway = new VideoGateway
