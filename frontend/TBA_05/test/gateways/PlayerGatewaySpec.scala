@@ -2,7 +2,7 @@ package gateways
 
 import org.specs2.specification.Scope
 import play.api.test.PlaySpecification
-import registry.MockEnvironment
+import components.MockEnvironment
 
 object PlayerGatewaySpec extends PlaySpecification {
 

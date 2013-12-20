@@ -1,6 +1,5 @@
-package registry
+package components
 
-import components.Registry
 import org.specs2.mock.Mockito
 
 abstract trait MockEnvironment extends Registry with Mockito {

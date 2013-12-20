@@ -3,7 +3,7 @@ package controllers
 import models.{Player, PlayerId}
 import org.specs2.specification.Scope
 import play.api.test.{FakeRequest, PlaySpecification}
-import registry.MockEnvironment
+import components.MockEnvironment
 import scala.concurrent.Future
 
 object PlayersSpec extends PlaySpecification {
