@@ -2,7 +2,7 @@
 
 @main("Toys Basketball Association") {
 
-    <h1 class="center">Toy Basketball Association</h1>
+    <h1 class="center">Toys Basketball Association</h1>
 
     <h1 class="tba-section-title mbl pbl">Top Videos of the week!</h1>
     @for(video <- videos){
@@ -29,6 +29,7 @@
         </div> <!-- /todo list -->
 
         <div class="col-md-8 tba-video">
+
             <video class="video-js" controls preload="auto" width="620" height="349" poster="assets/images/video/poster.jpg" data-setup="{}">
                 <source src="http://localhost:9002/videos/@video.id/stream.mp4" type="video/mp4">
             </video>
