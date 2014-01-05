@@ -41,7 +41,6 @@ object VideoResource extends Controller {
 
               stream.skip(start)
 
-              // TODO do we need connection = HttpConnection.KeepAlive?
               SimpleResult(
                 header = ResponseHeader(PARTIAL_CONTENT,
                   Map(
@@ -52,8 +51,7 @@ object VideoResource extends Controller {
                     CONTENT_TYPE -> "video/mp4"
                   )
                 ),
-                body = Enumerator.fromStream(stream),
-                connection = HttpConnection.KeepAlive
+                body = Enumerator.fromStream(stream)
               )
             }
           }
