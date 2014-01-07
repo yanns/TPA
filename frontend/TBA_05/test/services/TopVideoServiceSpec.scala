@@ -40,7 +40,7 @@ class TopVideoServiceSpec extends PlaySpecification {
   }
 
   "the top videos" should {
-    "be shown when service and player service answer as expected" in new TopVideoScope {
+    "be shown when video and player service answer as expected" in new TopVideoScope {
       videoGateway.top() returns Future.successful(TopVideos(Seq(video1, video2)))
       playerGateway.findPlayer(playerId2) returns Future.successful(FoundPlayer(player2))
       playerGateway.findPlayer(playerId5) returns Future.successful(FoundPlayer(player5))
