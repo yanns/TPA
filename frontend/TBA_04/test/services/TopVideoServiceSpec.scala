@@ -8,8 +8,8 @@ import scala.concurrent.Future
 
 class TopVideoServiceSpec extends PlaySpecification {
 
-   class TopVideoScope extends TopVideoServiceComponent
-       with TopVideoServiceComponentImpl
+   class TopVideoScope extends TopVideoServiceComp
+       with TopVideoServiceCompImpl
        with Scope
        with Mockito {
 

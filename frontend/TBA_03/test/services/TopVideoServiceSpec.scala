@@ -8,7 +8,7 @@ import scala.concurrent.Future
 
 class TopVideoServiceSpec extends PlaySpecification {
 
-   class TopVideoScope extends TopVideoServiceComponent with Scope with Mockito {
+   class TopVideoScope extends TopVideoServiceComp with Scope with Mockito {
      val playerId2 = PlayerId(2)
      val playerId5 = PlayerId(5)
      val video1 = Video(VideoId(4), "summary of video 4", Seq(playerId2))

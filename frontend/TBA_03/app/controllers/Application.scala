@@ -2,9 +2,9 @@ package controllers
 
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc._
-import services.TopVideoServiceComponent
+import services.TopVideoServiceComp
 
-trait Application extends Controller with TopVideoServiceComponent {
+trait Application extends Controller with TopVideoServiceComp {
 
   def index = Action.async {
     topVideoService.topVideos() map {

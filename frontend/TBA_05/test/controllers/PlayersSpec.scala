@@ -5,7 +5,7 @@ import org.specs2.specification.Scope
 import org.specs2.mock.Mockito
 import models.{Player, PlayerId}
 import scala.concurrent.Future
-import gateways.PlayerGatewayComponent
+import gateways.PlayerGatewayComp
 import components.MockEnvironment
 
 object PlayersSpec extends PlaySpecification {

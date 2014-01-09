@@ -1,17 +1,15 @@
 package gateways
 
-import httpclient.HttpClientComponent
+import httpclient.HttpClientComp
 import models.{PlayerId, VideoId}
 import play.api.http.Status._
 import play.api.libs.json.Json
 import scala.concurrent.Future
 
 
-trait VideoGatewayComponent {
+trait VideoGatewayComp extends HttpClientComp {
 
-  self: HttpClientComponent =>
-
-  def videoGateway: VideoGateway
+  val videoGateway = new VideoGateway
 
   // API
 
@@ -41,11 +39,4 @@ trait VideoGatewayComponent {
     }
 
   }
-}
-
-trait VideoGatewayComponentImpl extends VideoGatewayComponent {
-
-  self: HttpClientComponent =>
-
-  override val videoGateway = new VideoGateway
 }

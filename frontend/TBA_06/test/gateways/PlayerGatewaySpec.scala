@@ -6,7 +6,7 @@ import components.MockEnvironment
 
 object PlayerGatewaySpec extends PlaySpecification {
 
-  class PlayersGatewayFixture extends PlayerGatewayComponentImpl
+  class PlayersGatewayFixture extends PlayerGatewayCompImpl
     with MockEnvironment
     with SimulatedPlayerBackend
     with Scope {

@@ -1,14 +1,19 @@
 package gateways
 
-import httpclient.HttpClientComponent
+import httpclient.HttpClientComp
 import models.{PlayerId, VideoId}
 import play.api.http.Status._
 import play.api.libs.json.Json
 import scala.concurrent.Future
 
-trait VideoGatewayComponent {
+
+trait VideoGatewayComp {
+
+  self: HttpClientComp =>
 
   def videoGateway: VideoGateway
+
+  // API
 
   sealed trait TopVideosResponse
   case class TopVideos(videos: Seq[Video]) extends TopVideosResponse
@@ -20,19 +25,7 @@ trait VideoGatewayComponent {
     implicit val json = Json.reads[Video]
   }
 
-  trait VideoGateway {
-    def top(): Future[TopVideosResponse]
-  }
-
-}
-
-trait VideoGatewayComponentImpl extends VideoGatewayComponent {
-
-  self: HttpClientComponent =>
-
-  override val videoGateway: VideoGateway = new VideoGatewayImpl
-
-  class VideoGatewayImpl extends VideoGateway {
+  class VideoGateway {
 
     import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
@@ -48,4 +41,11 @@ trait VideoGatewayComponentImpl extends VideoGatewayComponent {
     }
 
   }
+}
+
+trait VideoGatewayCompImpl extends VideoGatewayComp {
+
+  self: HttpClientComp =>
+
+  override val videoGateway = new VideoGateway
 }

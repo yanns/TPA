@@ -1,7 +1,7 @@
 package services
 
-import gateways.{PlayerGatewayComponent, VideoGatewayComponent}
-import httpclient.HttpClientComponent
+import gateways.{PlayerGatewayComp, VideoGatewayComp}
+import httpclient.HttpClientComp
 import models.{Player, PlayerId, VideoId}
 import org.specs2.mock.Mockito
 import org.specs2.specification.Scope
@@ -10,10 +10,10 @@ import scala.concurrent.Future
 
 class TopVideoServiceSpec extends PlaySpecification {
 
-  class TopVideoScope extends TopVideoServiceComponent
-      with VideoGatewayComponent
-      with PlayerGatewayComponent
-      with HttpClientComponent // needed because of VideoGatewayComponent and PlayerGatewayComponent
+  class TopVideoScope extends TopVideoServiceComp
+      with VideoGatewayComp
+      with PlayerGatewayComp
+      with HttpClientComp // needed because of VideoGatewayComp and PlayerGatewayComp
       with Mockito
       with Scope {
 

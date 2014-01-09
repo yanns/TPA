@@ -1,14 +1,14 @@
 package componenttests
 
 import controllers.Players
-import gateways.{PlayerGatewayComponentImpl, SimulatedPlayerBackend}
+import gateways.{PlayerGatewayCompImpl, SimulatedPlayerBackend}
 import org.specs2.specification.Scope
 import play.api.test.{FakeRequest, PlaySpecification}
 
 object PlayerDetailSpec extends PlaySpecification {
 
   class PlayersControllerFixture extends Players
-    with PlayerGatewayComponentImpl
+    with PlayerGatewayCompImpl
     with SimulatedPlayerBackend
     with Scope
 

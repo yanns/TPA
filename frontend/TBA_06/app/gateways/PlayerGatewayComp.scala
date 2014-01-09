@@ -1,25 +1,34 @@
 package gateways
 
-import httpclient.HttpClientComponent
+import httpclient.HttpClientComp
 import models.{Player, PlayerId}
 import play.api.Logger
 import play.api.http.Status._
 import scala.concurrent.Future
 
-trait PlayerGatewayComponent extends HttpClientComponent {
+trait PlayerGatewayComp {
 
   def playerGateway: PlayerGateway
-
-
-  // API
 
   sealed trait FindPlayerResponse
   case class FoundPlayer(player: Player) extends FindPlayerResponse
   case object PlayerNotFound extends FindPlayerResponse
   case class FindPlayerResponseError(httpStatus: Int) extends FindPlayerResponse
 
+  trait PlayerGateway {
+    def findPlayer(id: PlayerId): Future[FindPlayerResponse]
+  }
+}
 
-  class PlayerGateway {
+trait PlayerGatewayCompImpl extends PlayerGatewayComp {
+
+  self: HttpClientComp =>
+
+  override val playerGateway: PlayerGateway = new PlayerGatewayImpl
+
+  // API
+
+  class PlayerGatewayImpl extends PlayerGateway {
 
     import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
@@ -43,6 +52,3 @@ trait PlayerGatewayComponent extends HttpClientComponent {
   }
 }
 
-trait PlayerGatewayComponentImpl extends PlayerGatewayComponent {
-  override val playerGateway = new PlayerGateway
-}

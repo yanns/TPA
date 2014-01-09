@@ -1,16 +1,16 @@
 package components
 
-import gateways.{PlayerGatewayComponentImpl, VideoGatewayComponentImpl, VideoGatewayComponent, PlayerGatewayComponent}
-import httpclient.{HttpClientComponentImpl, HttpClientComponent}
-import services.{TopVideoServiceComponentImpl, TopVideoServiceComponent}
+import gateways.{PlayerGatewayCompImpl, VideoGatewayCompImpl, VideoGatewayComp, PlayerGatewayComp}
+import httpclient.{HttpClientCompImpl, HttpClientComp}
+import services.{TopVideoServiceCompImpl, TopVideoServiceComp}
 
-trait Registry extends HttpClientComponent
-  with PlayerGatewayComponent
-  with VideoGatewayComponent
-  with TopVideoServiceComponent
+trait Registry extends HttpClientComp
+  with PlayerGatewayComp
+  with VideoGatewayComp
+  with TopVideoServiceComp
 
 trait RuntimeEnvironment extends Registry
-  with VideoGatewayComponentImpl
-  with HttpClientComponentImpl
-  with PlayerGatewayComponentImpl
-  with TopVideoServiceComponentImpl
+  with VideoGatewayCompImpl
+  with HttpClientCompImpl
+  with PlayerGatewayCompImpl
+  with TopVideoServiceCompImpl

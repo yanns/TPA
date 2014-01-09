@@ -3,7 +3,7 @@ package httpclient
 import play.api.libs.ws.WS
 import play.api.libs.ws.WS.WSRequestHolder
 
-trait HttpClientComponent {
+trait HttpClientComp {
 
   trait HttpClient {
     def url(url: String): WSRequestHolder
@@ -13,7 +13,7 @@ trait HttpClientComponent {
 
 }
 
-trait HttpClientComponentImpl extends HttpClientComponent {
+trait HttpClientCompImpl extends HttpClientComp {
 
   override val httpClient: HttpClient = new HttpClientImpl
 

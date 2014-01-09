@@ -2,7 +2,7 @@ package httpclient
 
 import org.specs2.mock.Mockito
 
-trait MockHttpClient extends HttpClientComponent with Mockito {
+trait MockHttpClient extends HttpClientComp with Mockito {
 
   val mockWS: MockWS
   override val httpClient = mock[HttpClient]

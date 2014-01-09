@@ -1,14 +1,14 @@
 package controllers
 
 import gateways._
-import httpclient.HttpClientComponentImpl
+import httpclient.HttpClientCompImpl
 import models.PlayerId
 import play.api.Logger
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc.{Action, Controller}
-import services.TopVideoServiceComponentImpl
+import services.TopVideoServiceCompImpl
 
-trait Players extends Controller with PlayerGatewayComponent {
+trait Players extends Controller with PlayerGatewayComp {
 
   def details(id: PlayerId) = Action.async {
     playerGateway.findPlayer(id) map {
@@ -24,7 +24,7 @@ trait Players extends Controller with PlayerGatewayComponent {
 }
 
 object Players extends Players
-  with PlayerGatewayComponentImpl
-  with VideoGatewayComponentImpl
-  with HttpClientComponentImpl
-  with TopVideoServiceComponentImpl
+  with PlayerGatewayCompImpl
+  with VideoGatewayCompImpl
+  with HttpClientCompImpl
+  with TopVideoServiceCompImpl

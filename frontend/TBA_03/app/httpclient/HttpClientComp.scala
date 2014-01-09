@@ -3,16 +3,11 @@ package httpclient
 import play.api.libs.ws.WS
 import play.api.libs.ws.WS.WSRequestHolder
 
-trait HttpClientComponent {
+trait HttpClientComp {
 
-  def httpClient: HttpClient
+  val httpClient = new HttpClient()
 
   class HttpClient {
     def url(url: String): WSRequestHolder = WS.url(url)
   }
-}
-
-trait HttpClientComponentImpl extends HttpClientComponent {
-
-  override val httpClient = new HttpClient
 }

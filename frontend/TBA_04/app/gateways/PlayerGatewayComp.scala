@@ -1,14 +1,14 @@
 package gateways
 
-import httpclient.HttpClientComponent
+import httpclient.HttpClientComp
 import models.{Player, PlayerId}
 import play.api.Logger
 import play.api.http.Status._
 import scala.concurrent.Future
 
-trait PlayerGatewayComponent extends HttpClientComponent {
+trait PlayerGatewayComp extends HttpClientComp {
 
-  val playerGateway = new PlayerGateway
+  def playerGateway: PlayerGateway
 
 
   // API
@@ -41,4 +41,8 @@ trait PlayerGatewayComponent extends HttpClientComponent {
     }
 
   }
+}
+
+trait PlayerGatewayCompImpl extends PlayerGatewayComp {
+  override val playerGateway = new PlayerGateway
 }

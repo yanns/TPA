@@ -5,11 +5,22 @@ import models.TopVideo
 import play.api.Logger
 import scala.concurrent.Future
 
-trait TopVideoServiceComponent extends PlayerGatewayComponent with VideoGatewayComponent {
+trait TopVideoServiceComp {
 
   def topVideoService: TopVideoService
 
-  class TopVideoService {
+  trait TopVideoService {
+    def topVideos(): Future[Option[Seq[TopVideo]]]
+  }
+}
+
+trait TopVideoServiceCompImpl extends TopVideoServiceComp {
+
+  self: PlayerGatewayComp with VideoGatewayComp =>
+
+  override val topVideoService: TopVideoService = new TopVideoServiceImpl
+
+  class TopVideoServiceImpl extends TopVideoService {
 
     import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
@@ -43,8 +54,4 @@ trait TopVideoServiceComponent extends PlayerGatewayComponent with VideoGatewayC
 
   }
 
-}
-
-trait TopVideoServiceComponentImpl extends TopVideoServiceComponent {
-  override val topVideoService = new TopVideoService
 }

@@ -9,7 +9,7 @@ import play.api.mvc.{Action, Controller}
 
 trait Players extends Controller {
 
-  self: PlayerGatewayComponent =>
+  self: PlayerGatewayComp =>
 
   def details(id: PlayerId) = Action.async {
     playerGateway.findPlayer(id) map {

@@ -6,7 +6,7 @@ import play.api.Logger
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc.{Action, Controller}
 
-trait Players extends Controller with PlayerGatewayComponent {
+trait Players extends Controller with PlayerGatewayComp {
 
   def details(id: PlayerId) = Action.async {
     playerGateway.findPlayer(id) map {

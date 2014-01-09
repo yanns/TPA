@@ -1,12 +1,12 @@
 package controllers
 
-import gateways.{VideoGatewayComponentImpl, PlayerGatewayComponentImpl}
-import httpclient.HttpClientComponentImpl
+import gateways.{VideoGatewayCompImpl, PlayerGatewayCompImpl}
+import httpclient.HttpClientCompImpl
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc._
-import services.{TopVideoServiceComponentImpl, TopVideoServiceComponent}
+import services.{TopVideoServiceCompImpl, TopVideoServiceComp}
 
-trait Application extends Controller with TopVideoServiceComponent {
+trait Application extends Controller with TopVideoServiceComp {
 
   def index = Action.async {
     topVideoService.topVideos() map {
@@ -19,7 +19,7 @@ trait Application extends Controller with TopVideoServiceComponent {
 }
 
 object Application extends Application
-  with PlayerGatewayComponentImpl
-  with VideoGatewayComponentImpl
-  with HttpClientComponentImpl
-  with TopVideoServiceComponentImpl
+  with PlayerGatewayCompImpl
+  with VideoGatewayCompImpl
+  with HttpClientCompImpl
+  with TopVideoServiceCompImpl

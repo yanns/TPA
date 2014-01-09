@@ -1,6 +1,6 @@
 package controllers
 
-import gateways.PlayerGatewayComponent
+import gateways.PlayerGatewayComp
 import models.{Player, PlayerId}
 import org.specs2.mock.Mockito
 import org.specs2.specification.Scope
@@ -9,7 +9,7 @@ import scala.concurrent.Future
 
 object PlayersSpec extends PlaySpecification {
 
-  trait MockPlayerService extends PlayerGatewayComponent with Mockito {
+  trait MockPlayerService extends PlayerGatewayComp with Mockito {
     override val playerGateway = mock[PlayerGateway]
   }
 

@@ -5,9 +5,9 @@ import play.api.test.PlaySpecification
 
 object PlayerGatewaySpec extends PlaySpecification {
 
-  class PlayersGatewayFixture extends PlayerGatewayComponent
+  class PlayersGatewayFixture extends PlayerGatewayComp
     with SimulatedPlayerBackend
-    with PlayerGatewayComponentImpl
+    with PlayerGatewayCompImpl
     with Scope
 
   "The player gateway" should {
