@@ -1,19 +1,16 @@
 package gateways
 
+import components.MockEnvironment
+import httpclient.SimulatedPlayerBackend
 import org.specs2.specification.Scope
 import play.api.test.PlaySpecification
-import components.MockEnvironment
 
 object PlayerGatewaySpec extends PlaySpecification {
 
-  class PlayersGatewayFixture extends PlayerGatewayCompImpl
-    with MockEnvironment
+  class PlayersGatewayFixture extends MockEnvironment
+    with PlayerGatewayCompImpl
     with SimulatedPlayerBackend
-    with Scope {
-
-    // the real implementation to test
-    override val playerGateway = new PlayerGatewayImpl
-  }
+    with Scope
 
   "The player gateway" should {
     "parse the json when the user service answer with OK" in new PlayersGatewayFixture {

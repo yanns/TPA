@@ -1,5 +1,6 @@
 package gateways
 
+import httpclient.SimulatedPlayerBackend
 import org.specs2.specification.Scope
 import play.api.test.PlaySpecification
 

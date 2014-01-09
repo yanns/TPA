@@ -23,7 +23,7 @@ import org.mockito.BDDMockito._
  * @param withRoutes routes defining the mock calls, like case (GET, "/") => StandaloneAction { Ok("2") }
  *                   It is advised to use [[httpclient.StandaloneAction]] to avoid starting a [[play.api.test.FakeApplication]]
  */
-class MockWS(val withRoutes: PartialFunction[(String, String), EssentialAction]) extends Mockito {
+case class MockWS(val withRoutes: PartialFunction[(String, String), EssentialAction]) extends Mockito {
 
   require(withRoutes != null)
 

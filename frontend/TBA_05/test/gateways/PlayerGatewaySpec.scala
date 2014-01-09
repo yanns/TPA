@@ -1,8 +1,9 @@
 package gateways
 
+import components.MockEnvironment
+import httpclient.SimulatedPlayerBackend
 import org.specs2.specification.Scope
 import play.api.test.PlaySpecification
-import components.MockEnvironment
 
 object PlayerGatewaySpec extends PlaySpecification {
 

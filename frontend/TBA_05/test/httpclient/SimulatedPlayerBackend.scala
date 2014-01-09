@@ -1,21 +1,22 @@
-package gateways
+package httpclient
 
-import httpclient.{MockHttpClient, StandaloneAction, MockWS}
 import models.PlayerId
+import org.specs2.mock.Mockito
 import play.api.libs.json.Json
 import play.api.mvc.Results._
 
-trait SimulatedPlayerBackend extends MockHttpClient {
-
-  val GET = "GET"
+trait SimulatedPlayerBackend extends HttpClientComp with Mockito {
 
   val playerId = PlayerId(34)
   val unknownPlayerId = PlayerId(92)
 
-  override val mockWS = new MockWS(withRoutes = {
-    case (GET, u) if u == s"http://localhost:9001/players/$playerId" => StandaloneAction { Ok(Json.parse(playerJson(playerId))) }
+  val mockWS = MockWS {
+    case ("GET", u) if u == s"http://localhost:9001/players/$playerId" => StandaloneAction { Ok(Json.parse(playerJson(playerId))) }
     case _ => StandaloneAction { NotFound }
-  })
+  }
+
+  override val httpClient = mock[HttpClient]
+  httpClient.url(any) answers { url  => mockWS.url(url.toString) }
 
   def playerJson(playerId: PlayerId) =
     s"""{

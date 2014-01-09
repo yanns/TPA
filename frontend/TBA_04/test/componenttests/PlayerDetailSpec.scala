@@ -1,7 +1,8 @@
 package componenttests
 
 import controllers.Players
-import gateways.{PlayerGatewayCompImpl, SimulatedPlayerBackend}
+import gateways.PlayerGatewayCompImpl
+import httpclient.SimulatedPlayerBackend
 import org.specs2.specification.Scope
 import play.api.test.{FakeRequest, PlaySpecification}
 
