@@ -9,12 +9,12 @@ import scala.concurrent.Future
 
 object PlayersSpec extends PlaySpecification {
 
-  trait MockPlayerService extends PlayerGatewayComp with Mockito {
+  trait MockPlayerGatewayComp extends PlayerGatewayComp with Mockito {
     override val playerGateway = mock[PlayerGateway]
     // real http client implementation
   }
 
-  class PlayersControllerFixture extends Players with MockPlayerService with Scope {
+  class PlayersControllerFixture extends Players with MockPlayerGatewayComp with Scope {
     val playerId = PlayerId(34)
     val player = Player(
       id = playerId,
