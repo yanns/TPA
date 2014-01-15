@@ -12,18 +12,18 @@ class TopVideoService {
 
   import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
-  val videoService = new VideoGateway()
+  val videoGateway = new VideoGateway()
 
-  val playerService = new PlayerGateway()
+  val playerGateway = new PlayerGateway()
 
   def topVideos(): Future[Option[Seq[TopVideo]]] = {
 
-    videoService.top() flatMap {
+    videoGateway.top() flatMap {
       case TopVideos(videos) => {
         Logger.debug(s"found ${videos.length} videos")
         val playerIds = (for (video <- videos) yield video.players).flatten.toSet
         val futurePlayers = playerIds.map { playerId =>
-          playerService.findPlayer(playerId) map {
+          playerGateway.findPlayer(playerId) map {
             case FoundPlayer(player) => playerId -> Some(player)
             case _ => playerId -> None
           }

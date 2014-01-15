@@ -8,10 +8,10 @@ import play.api.mvc.{Action, Controller}
 
 object Players extends Controller {
 
-  val playerService = new PlayerGateway
+  val playerGateway = new PlayerGateway
 
   def details(id: PlayerId) = Action.async {
-    playerService.findPlayer(id) map {
+    playerGateway.findPlayer(id) map {
       case FoundPlayer(p) => Ok(views.html.player(p))
       case PlayerNotFound => NotFound(s"player does not exist")
       case FindPlayerResponseError(badStatus) =>
