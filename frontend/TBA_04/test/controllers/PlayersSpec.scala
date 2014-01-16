@@ -7,7 +7,7 @@ import org.specs2.specification.Scope
 import play.api.test.{FakeRequest, PlaySpecification}
 import scala.concurrent.Future
 
-object PlayersSpec extends PlaySpecification {
+class PlayersSpec extends PlaySpecification {
 
   trait MockPlayerService extends PlayerGatewayComp with Mockito {
     override val playerGateway = mock[PlayerGateway]

@@ -8,7 +8,7 @@ import scala.concurrent.Future
 import gateways.PlayerGatewayComp
 import components.MockEnvironment
 
-object PlayersSpec extends PlaySpecification {
+class PlayersSpec extends PlaySpecification {
 
   class PlayersControllerFixture extends MockEnvironment with Players with Scope {
     val playerId = PlayerId(34)

@@ -6,7 +6,7 @@ import play.api.test.{FakeRequest, PlaySpecification}
 import components.MockEnvironment
 import scala.concurrent.Future
 
-object PlayersSpec extends PlaySpecification {
+class PlayersSpec extends PlaySpecification {
 
   class PlayersControllerFixture extends Players with Scope with MockEnvironment {
     val playerId = PlayerId(34)

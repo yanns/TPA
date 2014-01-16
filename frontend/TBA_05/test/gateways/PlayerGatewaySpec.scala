@@ -5,7 +5,7 @@ import httpclient.SimulatedPlayerBackend
 import org.specs2.specification.Scope
 import play.api.test.PlaySpecification
 
-object PlayerGatewaySpec extends PlaySpecification {
+class PlayerGatewaySpec extends PlaySpecification {
 
   class PlayersGatewayFixture extends MockEnvironment
       with PlayerGatewayComp
