@@ -4,7 +4,7 @@
 
     <h1 class="tba-section-title mbl pbl">Top Videos of the week!</h1>
     @for(video <- videos){
-    <div class="row">
+    <div class="row video" id="video-@video.id">
         <div class="col-md-4">
             <div class="todo">
                 <div class="todo-search">
@@ -12,7 +12,7 @@
                 </div>
                 <ul>
                     @for(player <- video.players){
-                    <li class="todo-done">
+                    <li class="todo-done player">
                         <div class="todo-icon fui-user"></div>
                         <div class="todo-content">
                             <h4 class="todo-name">
