@@ -37,28 +37,28 @@ class TopVideoServiceSpec extends PlaySpecification {
 
       val result = await(topVideoService.topVideos())
       result must beSome
-      result.get must haveSize (2)
+      result.get must haveSize(2)
     }
-  }
 
-  "be shown even if a player is not recognized" in new TopVideoScope {
-    videoGateway.top() returns Future.successful(TopVideos(Seq(video1, video2)))
-    playerGateway.findPlayer(playerId2) returns Future.successful(FoundPlayer(player2))
-    playerGateway.findPlayer(playerId5) returns Future.successful(PlayerNotFound)
+    "be shown even if a player is not recognized" in new TopVideoScope {
+      videoGateway.top() returns Future.successful(TopVideos(Seq(video1, video2)))
+      playerGateway.findPlayer(playerId2) returns Future.successful(FoundPlayer(player2))
+      playerGateway.findPlayer(playerId5) returns Future.successful(PlayerNotFound)
 
-    val result = await(topVideoService.topVideos())
-    result must beSome
-    result.get must haveSize (2)
-  }
+      val result = await(topVideoService.topVideos())
+      result must beSome
+      result.get must haveSize(2)
+    }
 
-  "be shown even if player service throws an error" in new TopVideoScope {
-    videoGateway.top() returns Future.successful(TopVideos(Seq(video1, video2)))
-    playerGateway.findPlayer(playerId2) returns Future.successful(FoundPlayer(player2))
-    playerGateway.findPlayer(playerId5) returns Future.failed(new Exception())
+    "be shown even if player service throws an error" in new TopVideoScope {
+      videoGateway.top() returns Future.successful(TopVideos(Seq(video1, video2)))
+      playerGateway.findPlayer(playerId2) returns Future.successful(FoundPlayer(player2))
+      playerGateway.findPlayer(playerId5) returns Future.failed(new Exception())
 
-    val result = await(topVideoService.topVideos())
-    result must beSome
-    result.get must haveSize (2)
+      val result = await(topVideoService.topVideos())
+      result must beSome
+      result.get must haveSize(2)
+    }
   }
 
 }
