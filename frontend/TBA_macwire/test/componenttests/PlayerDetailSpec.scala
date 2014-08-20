@@ -1,25 +1,19 @@
 package componenttests
 
 import com.typesafe.config.ConfigFactory
-import controllers.Players
 import gateways.SimulatedPlayerBackend
 import gateways.SimulatedPlayerBackend.{playerId, unknownPlayerId}
 import globals.TBAApplication
 import httpclient.MockWS
-import org.specs2.mock.Mockito
 import org.specs2.specification.Scope
 import play.api.Configuration
 import play.api.test.{FakeRequest, PlaySpecification}
 
 class PlayerDetailSpec extends PlaySpecification {
 
-  class PlayersControllerFixture extends TBAApplication with Mockito with Scope {
-
-    import com.softwaremill.macwire.MacwireMacros.wire
-
+  class PlayersControllerFixture extends TBAApplication with Scope {
     val configuration = Configuration(ConfigFactory.parseString(s"""player.gateway="${SimulatedPlayerBackend.baseURL}""""))
     val ws = MockWS(SimulatedPlayerBackend.routes)
-    override lazy val players = wire[Players]
   }
 
 
