@@ -2,17 +2,19 @@ package services
 
 import gateways.PlayerGateway.Model.{FoundPlayer, PlayerNotFound}
 import gateways.VideoGateway.Model.{TopVideos, Video}
-import gateways._
+import gateways.{PlayerGateway, VideoGateway}
 import models.{Player, PlayerId, VideoId}
-import org.specs2.mock.Mockito
-import org.specs2.specification.Scope
-import play.api.test.PlaySpecification
+import org.mockito.BDDMockito._
+import org.scalatest.mock.MockitoSugar
+import org.scalatest.{Matchers, OptionValues, WordSpec}
+import play.api.test.Helpers._
 
 import scala.concurrent.Future
+import scala.concurrent.Future.{successful ⇒ success}
 
-class TopVideoServiceSpec extends PlaySpecification {
+class TopVideoServiceSpec extends WordSpec with Matchers with MockitoSugar with OptionValues {
 
-  trait TopVideoScope extends Mockito with Scope {
+  trait TopVideoScope {
     val videoGateway = mock[VideoGateway]
     val playerGateway = mock[PlayerGateway]
 
@@ -35,33 +37,30 @@ class TopVideoServiceSpec extends PlaySpecification {
 
   "the top videos" should {
     "be shown when video and player service answer as expected" in new TopVideoScope {
-      videoGateway.top() returns Future.successful(TopVideos(Seq(video1, video2)))
-      playerGateway.findPlayer(playerId2) returns Future.successful(FoundPlayer(player2))
-      playerGateway.findPlayer(playerId5) returns Future.successful(FoundPlayer(player5))
+      given (videoGateway.top()) willReturn success(TopVideos(Seq(video1, video2)))
+      given (playerGateway.findPlayer(playerId2)) willReturn success(FoundPlayer(player2))
+      given (playerGateway.findPlayer(playerId5)) willReturn success(FoundPlayer(player5))
 
       val result = await(topVideoService.topVideos())
-      result must beSome
-      result.get must haveSize(2)
+      result.value should have size 2
     }
 
     "be shown even if a player is not recognized" in new TopVideoScope {
-      videoGateway.top() returns Future.successful(TopVideos(Seq(video1, video2)))
-      playerGateway.findPlayer(playerId2) returns Future.successful(FoundPlayer(player2))
-      playerGateway.findPlayer(playerId5) returns Future.successful(PlayerNotFound)
+      given (videoGateway.top()) willReturn success(TopVideos(Seq(video1, video2)))
+      given (playerGateway.findPlayer(playerId2)) willReturn success(FoundPlayer(player2))
+      given (playerGateway.findPlayer(playerId5)) willReturn success(PlayerNotFound)
 
       val result = await(topVideoService.topVideos())
-      result must beSome
-      result.get must haveSize(2)
+      result.value should have size 2
     }
 
     "be shown even if player service throws an error" in new TopVideoScope {
-      videoGateway.top() returns Future.successful(TopVideos(Seq(video1, video2)))
-      playerGateway.findPlayer(playerId2) returns Future.successful(FoundPlayer(player2))
-      playerGateway.findPlayer(playerId5) returns Future.failed(new Exception())
+      given (videoGateway.top()) willReturn success(TopVideos(Seq(video1, video2)))
+      given (playerGateway.findPlayer(playerId2)) willReturn success(FoundPlayer(player2))
+      given (playerGateway.findPlayer(playerId5)) willReturn Future.failed(new Exception())
 
       val result = await(topVideoService.topVideos())
-      result must beSome
-      result.get must haveSize(2)
+      result.value should have size 2
     }
   }
 

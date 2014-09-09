@@ -3,8 +3,8 @@
 # ~~~~
 
 # Home page
-GET        /                        @controllers.Homepage.index
-GET        /player/:id              @controllers.Players.details(id: models.PlayerId)
+GET        /                        controllers.Homepage.index
+GET        /player/:id              controllers.Players.details(id: models.PlayerId)
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file            controllers.Assets.at(path="/public", file)

@@ -3,12 +3,12 @@ package httpclient
 import org.mockito.BDDMockito._
 import org.mockito.invocation.InvocationOnMock
 import org.mockito.stubbing.Answer
-import org.specs2.mock.Mockito
+import org.scalatest.mock.MockitoSugar
 import play.api.Logger
 import play.api.http.{ContentTypeOf, Writeable}
 import play.api.libs.iteratee.{Iteratee, Enumerator}
 import play.api.libs.json.Json
-import play.api.libs.ws.{WSClient, WSResponse, WSRequestHolder}
+import play.api.libs.ws.{WSClient, WSResponse, WSRequest}
 import play.api.mvc.EssentialAction
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
@@ -16,12 +16,15 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.{Await, Future}
 import scala.language.postfixOps
+import scala.reflect.ClassTag
 
 /**
  * Mock [[play.api.libs.ws.WS]]
  * @param withRoutes routes defining the mock calls, like case (GET, "/") => Action { Ok("2") }
  */
-case class MockWS(withRoutes: MockWS.Routes) extends WSClient with Mockito {
+case class MockWS(withRoutes: MockWS.Routes) extends WSClient with MockitoSugar {
+
+  def close(): Unit = {}
 
   override def underlying[T]: T = this.asInstanceOf[T]
 
@@ -33,7 +36,7 @@ case class MockWS(withRoutes: MockWS.Routes) extends WSClient with Mockito {
     else
       throw new Exception(s"no routes defined for $method $path")
 
-  def url(url: String): WSRequestHolder = {
+  def url(url: String): WSRequest = {
 
     def answer(method: String) = new Answer[Future[WSResponse]] {
       def answer(invocation: InvocationOnMock): Future[WSResponse] = {
@@ -76,7 +79,7 @@ case class MockWS(withRoutes: MockWS.Routes) extends WSClient with Mockito {
       }
     }
 
-    val ws = mock[WSRequestHolder]
+    val ws = mock[WSRequest]
     given (ws.withAuth(any, any, any)) willReturn ws
     given (ws.withFollowRedirects(any)) willReturn ws
     given (ws.withHeaders(any)) willReturn ws
@@ -85,8 +88,8 @@ case class MockWS(withRoutes: MockWS.Routes) extends WSClient with Mockito {
     given (ws.withVirtualHost(any)) willReturn ws
 
     given (ws.get()) will answer(GET)
-    given (ws.post(any[AnyRef])(any, any)) will answer(POST)
-    given (ws.put(any[AnyRef])(any, any)) will answer(PUT)
+    given (ws.post(any[AnyRef])(any)) will answer(POST)
+    given (ws.put(any[AnyRef])(any)) will answer(PUT)
     given (ws.delete()) will answer(DELETE)
 
     ws
@@ -112,6 +115,8 @@ case class MockWS(withRoutes: MockWS.Routes) extends WSClient with Mockito {
     case Some(s) if s.contains("charset=") => Some(s.split("; charset=").drop(1).mkString.trim)
     case _ => None
   }
+
+  private def any[T : ClassTag]: T = org.mockito.Matchers.any(implicitly[ClassTag[T]].runtimeClass).asInstanceOf[T]
 }
 
 

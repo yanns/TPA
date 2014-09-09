@@ -1,17 +1,19 @@
 package controllers
 
 import gateways.PlayerGateway
-import gateways.PlayerGateway.Model.{FoundPlayer, PlayerNotFound}
-import models.{Player, PlayerId}
-import org.specs2.mock.Mockito
-import org.specs2.specification.Scope
-import play.api.test.{FakeRequest, PlaySpecification}
+import gateways.PlayerGateway.Model.{PlayerNotFound, FoundPlayer}
+import models.{PlayerId, Player}
+import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.mock.MockitoSugar
+import org.mockito.BDDMockito._
+import play.api.test.FakeRequest
+import play.api.test.Helpers._
 
 import scala.concurrent.Future
 
-class PlayersSpec extends PlaySpecification {
+class PlayersSpec extends WordSpec with Matchers with MockitoSugar {
 
-  class PlayersControllerFixture extends Mockito with Scope {
+  class PlayersControllerFixture {
     val playerGateway= mock[PlayerGateway]
 
     val players = new Players(playerGateway)
@@ -28,22 +30,22 @@ class PlayersSpec extends PlaySpecification {
 
   "The player controller" should {
     "show the player's detail" in new PlayersControllerFixture {
-      playerGateway.findPlayer(playerId) returns Future.successful(FoundPlayer(player))
+      given (playerGateway.findPlayer(playerId)) willReturn Future.successful(FoundPlayer(player))
       val result = players.details(playerId).apply(FakeRequest())
 
-      status(result) mustEqual OK
+      status(result) shouldEqual OK
       val html = contentAsString(result)
-      html must contain (player.name)
-      html must contain (player.height)
-      html must contain (player.weight)
-      html must contain (player.team)
+      html should include (player.name)
+      html should include (player.height)
+      html should include (player.weight)
+      html should include (player.team)
     }
 
     "handle when the player does not exist" in new PlayersControllerFixture {
-      playerGateway.findPlayer(playerId) returns Future.successful(PlayerNotFound)
+      given (playerGateway.findPlayer(playerId)) willReturn Future.successful(PlayerNotFound)
       val result = players.details(playerId).apply(FakeRequest())
 
-      status(result) mustEqual NOT_FOUND
+      status(result) shouldEqual NOT_FOUND
     }
   }
 
