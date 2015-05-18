@@ -1,10 +1,10 @@
 package globals
 
-import com.softwaremill.macwire.MacwireMacros.wire
+import com.softwaremill.macwire._
 import gateways.{PlayerGateway, VideoGateway}
 import monitoring.MonitoringInterceptor
-import play.api.libs.ws.{WS, WSClient}
-import play.api.{Application, Configuration, Play}
+import play.api.Configuration
+import play.api.libs.ws.WSClient
 import services.TopVideoService
 
 trait TBAApplication {
@@ -20,22 +20,6 @@ trait TBAApplication {
 
   // dependencies
   def configuration: Configuration
-  def ws: WSClient
+  def wsClient: WSClient
 }
 
-trait WSClientModule {
-  lazy val ws = WS.client(application)
-
-  // dependencies
-  def application: Application
-}
-
-trait PlayModule {
-  lazy val application = Play.current
-  lazy val configuration = application.configuration
-}
-
-object RuntimeEnvironment
-  extends TBAApplication
-  with WSClientModule
-  with PlayModule

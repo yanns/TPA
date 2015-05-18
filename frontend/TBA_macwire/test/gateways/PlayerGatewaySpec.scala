@@ -1,17 +1,15 @@
 package gateways
 
 import com.typesafe.config.ConfigFactory
-import gateways.PlayerGateway.Model.{PlayerNotFound, FoundPlayer}
-import gateways.SimulatedPlayerBackend.{playerId, unknownPlayerId}
+import gateways.PlayerGateway.Model.{FoundPlayer, PlayerNotFound}
 import httpclient.MockWS
-import org.specs2.mock.Mockito
-import org.specs2.specification.Scope
+import org.scalatest.{Matchers, WordSpec}
 import play.api.Configuration
-import play.api.test.PlaySpecification
+import play.api.test.Helpers._
 
-class PlayerGatewaySpec extends PlaySpecification {
+class PlayerGatewaySpec extends WordSpec with Matchers {
 
-  class PlayersGatewayFixture extends Mockito with Scope {
+  class PlayersGatewayFixture {
     val ws = MockWS(SimulatedPlayerBackend.routes)
 
     val configuration = Configuration(ConfigFactory.parseString(s"""player.gateway="${SimulatedPlayerBackend.baseURL}""""))
@@ -20,15 +18,17 @@ class PlayerGatewaySpec extends PlaySpecification {
     val playerGateway = new PlayerGateway(ws, configuration)
   }
 
+  import SimulatedPlayerBackend.{playerId, unknownPlayerId}
+
   "The player gateway" should {
     "parse the json when the user service answer with OK" in new PlayersGatewayFixture {
       val result = await(playerGateway.findPlayer(playerId))
-      result must beLike { case FoundPlayer(p) => p.id mustEqual playerId }
+      result should matchPattern { case FoundPlayer(p) if p.id == playerId ⇒ }
     }
 
     "handle when the player does not exist" in new PlayersGatewayFixture {
       val result = await(playerGateway.findPlayer(unknownPlayerId))
-      result must beLike { case PlayerNotFound => ok }
+      result shouldBe a [PlayerNotFound.type]
     }
   }
 
