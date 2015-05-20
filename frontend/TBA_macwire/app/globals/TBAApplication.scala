@@ -7,6 +7,9 @@ import play.api.Configuration
 import play.api.libs.ws.WSClient
 import services.TopVideoService
 
+/**
+ * Wiring for the TBA application
+ */
 trait TBAApplication {
   lazy val homepage = wire[controllers.Homepage]
   lazy val players = wire[controllers.Players]

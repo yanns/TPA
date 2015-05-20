@@ -13,9 +13,12 @@ class TBAApplicationLoader extends ApplicationLoader {
   }
 }
 
+/**
+ * the complete cake for the TBA application
+ */
 trait TBAComponents
-  extends BuiltInComponents
-  with NingWSComponents
+  extends BuiltInComponents // standard play components
+  with NingWSComponents // for wsClient
   with TBAApplication {
 
   import com.softwaremill.macwire._
