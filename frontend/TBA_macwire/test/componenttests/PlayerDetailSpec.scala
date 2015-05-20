@@ -3,7 +3,7 @@ package componenttests
 import com.typesafe.config.ConfigFactory
 import gateways.SimulatedPlayerBackend
 import globals.TBAApplication
-import httpclient.MockWS
+import mockws.MockWS
 import org.scalatest.{Matchers, WordSpec}
 import play.api.Configuration
 import play.api.test._

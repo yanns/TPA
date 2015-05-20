@@ -2,7 +2,7 @@ package gateways
 
 import com.typesafe.config.ConfigFactory
 import gateways.PlayerGateway.Model.{FoundPlayer, PlayerNotFound}
-import httpclient.MockWS
+import mockws.MockWS
 import org.scalatest.{Matchers, WordSpec}
 import play.api.Configuration
 import play.api.test.Helpers._

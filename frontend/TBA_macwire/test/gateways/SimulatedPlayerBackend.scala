@@ -1,6 +1,6 @@
 package gateways
 
-import httpclient.MockWS
+import mockws.MockWS
 import models.PlayerId
 import play.api.http.HttpVerbs._
 import play.api.libs.json.Json

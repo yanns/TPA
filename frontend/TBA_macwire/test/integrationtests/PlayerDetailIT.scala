@@ -5,7 +5,7 @@ import java.io.File
 import gateways.SimulatedPlayerBackend
 import gateways.SimulatedPlayerBackend.{playerId, unknownPlayerId}
 import globals.TBAComponents
-import httpclient.MockWS
+import mockws.MockWS
 import org.scalatest.{Matchers, WordSpec}
 import play.api.ApplicationLoader.Context
 import play.api._

@@ -13,7 +13,8 @@ libraryDependencies ++= Seq(
 libraryDependencies ++= Seq(
   "org.mockito" % "mockito-core" % "1.9.5",
   "org.jsoup" % "jsoup" % "1.7.3",
-  "org.scalatest" %% "scalatest" % "2.2.4"
+  "org.scalatest" %% "scalatest" % "2.2.4",
+  "de.leanovate.play-mockws" %% "play-mockws" % "2.4.0"
 ).map(_ % "test")
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
