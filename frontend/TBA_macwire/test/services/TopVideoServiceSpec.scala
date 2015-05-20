@@ -57,7 +57,7 @@ class TopVideoServiceSpec extends WordSpec with Matchers with MockitoSugar with 
     "be shown even if player service throws an error" in new TopVideoScope {
       given (videoGateway.top()) willReturn success(TopVideos(Seq(video1, video2)))
       given (playerGateway.findPlayer(playerId2)) willReturn success(FoundPlayer(player2))
-      given (playerGateway.findPlayer(playerId5)) willReturn Future.failed(new Exception())
+      given (playerGateway.findPlayer(playerId5)) willReturn Future.failed(new Exception("simulated error"))
 
       val result = await(topVideoService.topVideos())
       result.value should have size 2
