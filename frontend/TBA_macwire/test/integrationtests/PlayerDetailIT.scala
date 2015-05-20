@@ -15,7 +15,8 @@ import play.api.test.{TestServer, WsTestClient}
 
 class PlayerDetailIT extends WordSpec with Matchers {
 
-  val context = ApplicationLoader.createContext(new Environment(new File("."), ApplicationLoader.getClass.getClassLoader, Mode.Test))
+  val context = ApplicationLoader.createContext(
+    new Environment(new File("."), ApplicationLoader.getClass.getClassLoader, Mode.Test))
 
   class TBAApplicationLoaderMock extends ApplicationLoader {
     override def load(context: Context): Application = {
