@@ -11,9 +11,9 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.mockito" % "mockito-core" % "1.9.5",
-  "org.jsoup" % "jsoup" % "1.7.3",
-  "org.scalatest" %% "scalatest" % "2.2.4",
+  "org.mockito" % "mockito-core" % "1.10.19",
+  "org.jsoup" % "jsoup" % "1.8.2",
+  "org.scalatest" %% "scalatest" % "2.2.5",
   "de.leanovate.play-mockws" %% "play-mockws" % "2.4.0"
 ).map(_ % "test")
 
