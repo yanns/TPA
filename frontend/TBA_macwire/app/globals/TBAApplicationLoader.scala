@@ -9,6 +9,7 @@ import router.Routes
 
 class TBAApplicationLoader extends ApplicationLoader {
   override def load(context: Context): Application = {
+    Logger.configure(context.environment)
     (new BuiltInComponentsFromContext(context) with TBAComponents).application
   }
 }
