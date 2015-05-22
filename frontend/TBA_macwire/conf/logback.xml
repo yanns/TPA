@@ -12,7 +12,7 @@
     <logger name="application" level="DEBUG" />
     <logger name="duration" level="DEBUG" />
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 
