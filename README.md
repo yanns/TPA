@@ -7,6 +7,8 @@ It was used in a presentation at [Ping Conf](http://www.ping-conf.com/) in 2014:
 - video of the presentation: http://www.ustream.tv/recorded/42775808
 - slides: https://speakerdeck.com/yanns/structure-a-play-application-with-the-cake-pattern-and-test-it
 
+It was then extended for compile time dependency injection with [macwire](https://github.com/adamw/macwire) (or simple class constructors)
+- slides: http://de.slideshare.net/yann_s/play-24dimacwire
 
 Structure
 =========
@@ -14,6 +16,8 @@ Structure
 This [frontend application](/frontend/) uses two backend: a [micro-service about players](backends/PlayerService/) and a [video streaming app](backends/VideoService/)
 
 The cake pattern in progressively introduces in a frontend application, from [TBA_01](frontend/TBA_01) to [TBA_06](frontend/TBA_06). The final version is [TBA_05_final](frontend/TBA_05_final).
+
+The version with macwire is [TBA_macwire](frontend/TBA_macwire).
 
 
 How to run this application
